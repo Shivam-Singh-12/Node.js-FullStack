@@ -30,3 +30,18 @@ db.myUsers.insertOne({empName : "Shivam", empPass : "12345"})
 db.myUsers.find()
 show collections
 npm install mongoose
+
+npm install cors
+
+npm install jsonwebtoken
+incryption
+dealing with databases
+
+npm install morgan
+npm install winston
+npm install express-validator
+npm install mocha chai chai-http --save -dev
+ADD : package.json file : "scripts": {"start" : "nodemon index.js, "test": "mocha""}
+npm run test
+
+

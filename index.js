@@ -15,14 +15,34 @@
 // express
 const express = require('express');
 // 
-const routes = require('./routes/routes')
+const routes = require('./routes/routes');
+// 
+const m = require('./controllers/morgan_config');
+// 
 const port = 8000;
 const app = express();
 const router = express.Router();
-// 
 routes(router);
+// 
+var cors = require('cors');
+app.use(cors());
+// 
 app.use(express.json());
-app.use(express.urlencoded({extended : false}));
+app.use(express.urlencoded({ extended: false }));
+app.set('view engine', 'pug');
+
+// morgan - user goes to particular app path help to login 
+// const Morgan = require('morgan');  //moving to middleware file controllers
+// const fs = require('fs');
+// const path = require('path');
+// const m = new Morgan(
+//     'dev',
+//     {
+//         stream: fs.createWriteStream('./logs/morgan_access.log')
+//     }
+// );
+app.use(m);
+// //////////////////////////////////////////////////////////////
 
 // router.get('/', (req, res) =>{
 //     res.send("Hello from express");
@@ -36,7 +56,9 @@ app.use(express.urlencoded({extended : false}));
 
 //  configiure with router with app
 app.use('/', router);
+app.use(express.static('HTML'));
 // 
-app.listen(port, function(){
+app.listen(port, function () {
     console.log(`Server running on http://localhost:${port}`);
+    console.log('CORS-enabled web server listening on port 8000');
 })
